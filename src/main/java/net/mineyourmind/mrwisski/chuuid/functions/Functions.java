@@ -31,8 +31,16 @@ public class Functions {
 				throws ConfigRuntimeException {
 			if(CHUUID.instance.uuidprov != null && CHUUID.instance.enabled){
 				UUID uuid = UUID.fromString(arg2[0].getValue());
-				String name = UUIDProvider.retrieve(uuid);
-				return new CString(name,arg0);
+				if(uuid == null){
+					return null;
+				} else {
+					String name = UUIDProvider.retrieve(uuid);
+					if(name == null){
+						return null;
+					} else {
+						return new CString(name,arg0);
+					}
+				}
 			} else {
 				return null;
 			}
@@ -84,7 +92,11 @@ public class Functions {
 
 			if(CHUUID.instance.uuidprov != null && CHUUID.instance.enabled){
 				UUID uuid = UUIDProvider.retrieve(arg2[0].getValue());
-				return new CString(uuid.toString(),arg0);
+				if(uuid == null){
+					return null;
+				} else {
+					return new CString(uuid.toString(),arg0);
+				}
 			} else {
 				return null;
 			}
