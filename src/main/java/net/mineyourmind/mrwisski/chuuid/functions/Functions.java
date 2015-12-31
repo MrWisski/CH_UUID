@@ -8,6 +8,7 @@ import net.mineyourmind.mrwisski.chuuid.CHUUID;
 import com.laytonsmith.PureUtilities.Version;
 import com.laytonsmith.annotations.api;
 import com.laytonsmith.core.CHVersion;
+import com.laytonsmith.core.constructs.CInt;
 import com.laytonsmith.core.constructs.CString;
 import com.laytonsmith.core.constructs.Construct;
 import com.laytonsmith.core.constructs.Target;
@@ -21,6 +22,7 @@ public class Functions {
 	
     public static String docs() {
         return "Nothing to see here...";
+        
     }
  
     @api(environments = {CommandHelperEnvironment.class})
@@ -32,17 +34,17 @@ public class Functions {
 			if(CHUUID.instance.uuidprov != null && CHUUID.instance.enabled){
 				UUID uuid = UUID.fromString(arg2[0].getValue());
 				if(uuid == null){
-					return null;
+					return new CInt(-1,arg0);
 				} else {
-					String name = UUIDProvider.retrieve(uuid);
+					String name = UUIDProvider.getCachedPlayer(uuid);
 					if(name == null){
-						return null;
+						return new CInt(-1,arg0);
 					} else {
 						return new CString(name,arg0);
 					}
 				}
 			} else {
-				return null;
+				return new CInt(-1,arg0);
 			}
 		}
 
@@ -91,14 +93,14 @@ public class Functions {
 //			MCPlayer p = arg1.getEnv(CommandHelperEnvironment.class).GetPlayer();
 
 			if(CHUUID.instance.uuidprov != null && CHUUID.instance.enabled){
-				UUID uuid = UUIDProvider.retrieve(arg2[0].getValue());
+				UUID uuid = UUIDProvider.getCachedPlayer(arg2[0].getValue());
 				if(uuid == null){
-					return null;
+					return new CInt(-1,arg0);
 				} else {
 					return new CString(uuid.toString(),arg0);
 				}
 			} else {
-				return null;
+				return new CInt(-1,arg0);
 			}
 		}
 
