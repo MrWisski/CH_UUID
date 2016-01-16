@@ -36,7 +36,7 @@ public class Functions {
 				if(uuid == null){
 					return new CInt(-1,arg0);
 				} else {
-					String name = UUIDProvider.getCachedPlayer(uuid);
+					String name = UUIDProvider.retrieve(uuid);
 					if(name == null){
 						return new CInt(-1,arg0);
 					} else {
@@ -93,7 +93,7 @@ public class Functions {
 //			MCPlayer p = arg1.getEnv(CommandHelperEnvironment.class).GetPlayer();
 
 			if(CHUUID.instance.uuidprov != null && CHUUID.instance.enabled){
-				UUID uuid = UUIDProvider.getCachedPlayer(arg2[0].getValue());
+				UUID uuid = UUIDProvider.retrieve(arg2[0].getValue());
 				if(uuid == null){
 					return new CInt(-1,arg0);
 				} else {
